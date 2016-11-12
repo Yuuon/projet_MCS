@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ProjetMCS</string>
+    <string name="arr_te_toi">Arrête toi</string>
+    <string name="arrete_toi">arrete toi</string>
+    <string name="avance">Avance</string>
+    <string name="droite">Droite</string>
+    <string name="etat_urgence">Etat urgence</string>
+    <string name="fais_un_flip">Fais un flip</string>
+    <string name="gauche">Gauche</string>
+    <string name="recule">Recule</string>
+    <string name="trouner_droite">Trouner Droite</string>
+    <string name="trouner_gauche">Trouner Gauche</string>
+    <string name="stop">stop</string>
+    <string name="sampletext">sampleText</string>
+    <string name="start">start</string>
+    <string name="button">Button</string>
+</resources>

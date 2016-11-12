@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="310dp">
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:text="AVANCE"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/avance"
+                android:onClick="recAvance"
+                tools:layout_editor_absoluteY="16dp"
+                tools:layout_editor_absoluteX="30dp" />
+
+            <Button
+                android:text="RECULE"
+                android:layout_width="162dp"
+                android:layout_height="50dp"
+                tools:layout_editor_absoluteY="64dp"
+                android:id="@+id/recule"
+                android:onClick="recRecule"
+                tools:layout_editor_absoluteX="30dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:text="DROITE"
+                android:layout_width="162dp"
+                android:layout_height="50dp"
+                tools:layout_editor_absoluteX="30dp"
+                android:id="@+id/droite"
+                android:onClick="recDroite"
+                tools:layout_editor_absoluteY="111dp" />
+
+            <Button
+                android:text="GAUCHE"
+                android:layout_width="162dp"
+                android:layout_height="50dp"
+                android:id="@+id/gauche"
+                android:onClick="recGauche"
+                tools:layout_editor_absoluteY="160dp"
+                tools:layout_editor_absoluteX="30dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:text="TROUNE DROITE"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteY="802dp"
+                android:id="@+id/troune_droite"
+                android:onClick="recTrouneDroite"
+                tools:layout_editor_absoluteX="30dp" />
+
+            <Button
+                android:text="TROUNE GAUCHE"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/troune_gauche"
+                android:onClick="recTrouneGauche"
+                tools:layout_editor_absoluteY="850dp"
+                tools:layout_editor_absoluteX="30dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:text="FAIS UN FLIP"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteY="898dp"
+                android:id="@+id/fais_flip"
+                android:onClick="recFaisFlip"
+                tools:layout_editor_absoluteX="30dp" />
+
+            <Button
+                android:text="ARRETE TOI"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="30dp"
+                android:id="@+id/arrete_toi"
+                android:onClick="recArreteToi"
+                tools:layout_editor_absoluteY="946dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:text="ETAT D'URGENCE"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="30dp"
+                android:id="@+id/etat_urgence"
+                android:onClick="recEtatUrgence"
+                tools:layout_editor_absoluteY="994dp" />
+
+        </TableRow>
+    </TableLayout>
+    <Button
+        android:text="test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonTest"
+        android:onClick="goTest"/>
+</LinearLayout>
