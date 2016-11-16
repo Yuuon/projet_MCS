@@ -1,11 +1,8 @@
 package com.himenomiya.www.projetmcs;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
-import android.media.AudioManager;
 import android.media.AudioRecord;
-import android.media.AudioTrack;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,10 +11,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,9 +22,8 @@ import java.io.IOException;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+public class TestCommand extends AppCompatActivity {
 
-
-public class recording extends AppCompatActivity {
     private static final int RECORDER_BPP = 16;
     private static final int RECORDER_SAMPLERATE = 44100;
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
@@ -44,30 +38,21 @@ public class recording extends AppCompatActivity {
 
     public static final int RequestPermissionCode = 1;
 
-    Button buttonStart,buttonStop,buttonPlay;
-    String message;
+    Button buttonStart,buttonStop;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recording);
-        Intent intent = getIntent();
-        message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        final TextView filename = (TextView) findViewById(R.id.textView3);
-        filename.setText(message);
-        buttonStart = (Button) findViewById(R.id.buttonStart);
-        buttonStop = (Button) findViewById(R.id.buttonstop);
-        buttonPlay = (Button) findViewById(R.id.buttonPlay);
+        setContentView(R.layout.activity_test_command);
+
+        buttonStart = (Button) findViewById(R.id.recordRef);
+        buttonStop = (Button) findViewById(R.id.stopRec);
+
 
         buttonStart.setEnabled(true);
         buttonStop.setEnabled(false);
 
-        File recExist = new File(getFilename());
 
-        if(recExist.exists() && !recExist.isDirectory()) {
-            buttonPlay.setEnabled(true);
-        } else {
-            buttonPlay.setEnabled(false);
-        }
         bufferSize = AudioRecord.getMinBufferSize(8000,
                 AudioFormat.CHANNEL_IN_MONO,
                 AudioFormat.ENCODING_PCM_16BIT);
@@ -104,8 +89,7 @@ public class recording extends AppCompatActivity {
     }
 
     private String getFilename(){
-        return (Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
-                message + ".wav");
+        return (Environment.getExternalStorageDirectory().getAbsolutePath() + "/ref.wav");
     }
 
     private void writeAudioDataToFile(){
@@ -259,7 +243,7 @@ public class recording extends AppCompatActivity {
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(recording.this, new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, RequestPermissionCode);
+        ActivityCompat.requestPermissions(TestCommand.this, new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, RequestPermissionCode);
     }
 
     @Override
@@ -274,10 +258,10 @@ public class recording extends AppCompatActivity {
                             PackageManager.PERMISSION_GRANTED;
 
                     if (StoragePermission && RecordPermission) {
-                        Toast.makeText(recording.this, "Permission Granted",
+                        Toast.makeText(TestCommand.this, "Permission Granted",
                                 Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(recording.this,"Permission Denied",Toast.LENGTH_LONG).show();
+                        Toast.makeText(TestCommand.this,"Permission Denied",Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -293,7 +277,7 @@ public class recording extends AppCompatActivity {
                 result1 == PackageManager.PERMISSION_GRANTED;
     }
 
-    public void startRecording(View view) {
+    public void startRecordingRef(View view) {
         if(checkPermission()) {
 
 
@@ -303,81 +287,23 @@ public class recording extends AppCompatActivity {
             buttonStart.setEnabled(false);
             buttonStop.setEnabled(true);
 
-            Toast.makeText(recording.this, "Recording started",Toast.LENGTH_LONG).show();
+            Toast.makeText(TestCommand.this, "Recording started",Toast.LENGTH_LONG).show();
         } else {
             requestPermission();
         }
 
     }
-    public void stopRecording(View view) {
+    public void stopRecordingRef(View view) {
         buttonStop.setEnabled(false);
-        buttonPlay.setEnabled(true);
         buttonStart.setEnabled(true);
-
-
-
-        Toast.makeText(recording.this, "Recording Completed",
+        Toast.makeText(TestCommand.this, "Recording Completed",
                 Toast.LENGTH_LONG).show();
-
-
-
 
         stopRecording();
-    }
-
-    public  void startPlaying(View view) {
-        buttonStop.setEnabled(false);
-        buttonStart.setEnabled(true);
-        buttonPlay.setEnabled(true);
-
-
-        Toast.makeText(recording.this, "Recording Playing",
-                Toast.LENGTH_LONG).show();
-        playingThread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                playWav();
-            }
-        },"AudioTrack Thread");
-
-        playingThread.start();
-
+        //TODO : fonction externe(C++ & MATLAB) pour comparer les audios
 
     }
 
 
-    public void playWav(){
-        int minBufferSize = AudioTrack.getMinBufferSize(8000, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT);
-        int bufferSize = 512;
-        AudioTrack at = new AudioTrack(AudioManager.STREAM_MUSIC, 44100 * 2, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT, minBufferSize, AudioTrack.MODE_STREAM);
 
-
-        int i = 0;
-        byte[] s = new byte[bufferSize];
-        try {
-            FileInputStream fin = new FileInputStream(getFilename());
-            DataInputStream dis = new DataInputStream(fin);
-
-            at.play();
-            while((i = dis.read(s, 0, bufferSize)) > -1){
-                at.write(s, 0, i);
-
-            }
-            at.stop();
-            at.release();
-            dis.close();
-            fin.close();
-
-        } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-    }
 }
-
-

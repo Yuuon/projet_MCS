@@ -81,4 +81,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
+
+    public void goTest(View view) {
+        Intent intent = new Intent(this, TestCommand.class);
+        startActivity(intent);
+    }
 }
