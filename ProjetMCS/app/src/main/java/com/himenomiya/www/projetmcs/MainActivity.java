@@ -47,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void recTrouneDroite(View view) {
+    public void recTourneDroite(View view) {
         Intent intent = new Intent(this, recording.class);
         String message = "tourne_droite";
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
-    public void recTrouneGauche(View view) {
+    public void recTourneGauche(View view) {
         Intent intent = new Intent(this, recording.class);
-        String message = "troune_gauche";
+        String message = "tourne_gauche";
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
