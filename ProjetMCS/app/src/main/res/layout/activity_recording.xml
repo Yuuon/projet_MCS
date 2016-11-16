@@ -51,20 +51,15 @@
             android:text="stop recording"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonstop" />
+            android:id="@+id/buttonstop"
+            android:onClick="stopRecording"/>
 
         <Button
             android:text="PLAY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonPlay" />
-
-        <Button
-            android:text="Stop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonRecStop"
-            android:onClick="stopRecording"/>
+            android:id="@+id/buttonPlay"
+            android:onClick="startPlaying"/>
 
     </LinearLayout>
 
